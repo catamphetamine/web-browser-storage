@@ -1,0 +1,45 @@
+{
+  "name": "web-browser-storage",
+  "version": "0.1.6",
+  "description": "Web browser storage",
+  "type": "module",
+  "main": "index.js",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    },
+    "./cache": {
+      "types": "./cache.d.ts",
+      "import": "./cache.js"
+    }
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
+  },
+  "scripts": {
+    "test": "node --experimental-json-modules node_modules/mocha/bin/_mocha --require ./test/setup.js --reporter spec --colors --bail --exit --recursive \"./{,!(node_modules)/**/}*.test.js\"",
+    "prepublishOnly": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/catamphetamine/web-browser-storage.git"
+  },
+  "keywords": [
+    "frontend",
+    "storage",
+    "browser"
+  ],
+  "author": "catamphetamine <purecatamphetamine@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/catamphetamine/web-browser-storage/issues"
+  },
+  "homepage": "https://gitlab.com/catamphetamine/web-browser-storage#readme",
+  "dependencies": {
+    "web-browser-tab": "^0.1.4",
+    "web-browser-timer": "^0.1.0"
+  }
+}
