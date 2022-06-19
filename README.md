@@ -39,7 +39,7 @@ storage.getRecordSize('key') === 24 // in bytes
 storage.keys() === ['key']
 
 const unlistenExternalChanges = storage.onExternalChange(({ key, value, prevValue }) => {
-	console.log(key, value)
+  console.log(key, value)
 })
 ```
 
@@ -49,7 +49,7 @@ Checking `localStorage` [availability](http://crocodillon.com/blog/always-catch-
 import { LocalStorage } from 'web-browser-storage'
 
 if (!LocalStorage.isAvailable()) {
-	alert('You seem to have disabled `localStorage`')
+  alert('You seem to have disabled `localStorage`')
 }
 ```
 
@@ -81,11 +81,11 @@ const storage1 = storageSource.createSharedInstance('1')
 const storage2 = storageSource.createSharedInstance('2')
 
 const unlistenExternalChanges1 = storage1.onExternalChange(
-	() => console.log('External change detected in storage 1')
+  () => console.log('External change detected in storage 1')
 )
 
 const unlistenExternalChanges2 = storage2.onExternalChange(
-	() => console.log('External change detected in storage 2')
+  () => console.log('External change detected in storage 2')
 )
 
 // Will print "External change detected in storage 2".
@@ -111,8 +111,8 @@ import { LocalStorage } from 'web-browser-storage'
 const localStorage = new LocalStorage()
 
 const storage = new CachedStorage({
-	storage: localStorage,
-	flushDelay: 30 * 1000 // in milliseconds
+  storage: localStorage,
+  flushDelay: 30 * 1000 // in milliseconds
 })
 
 storage.start()
