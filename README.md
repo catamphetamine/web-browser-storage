@@ -68,6 +68,10 @@ const storage = new MemoryStorage()
 
 storage.set('key', { a: 'b' })
 storage.get('key') === { a: 'b' }
+
+storage.getData() === { key: { a: 'b' } }
+storage.setData({ key2: 'value2' })
+storage.getData() === { key2: 'value2' }
 ```
 
 Creating several `MemoryStorage` instances that share the same data:

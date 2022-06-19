@@ -31,4 +31,6 @@ interface MemoryStorageOptions {
 export class MemoryStorage {
   constructor(options?: MemoryStorageOptions);
   createSharedInstance(id: string): MemoryStorage;
+  getData(): object;
+  setData(data: object): void;
 }
