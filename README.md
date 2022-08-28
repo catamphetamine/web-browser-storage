@@ -23,6 +23,10 @@ A `Storage` interface provides the following methods:
 * `delete(key)`
 * `keys() => string[]`
 * `onExternalChange(handlerFunction: ({ key, value, prevValue }) => {}) => stopListeningFunction`
+  * `value` and `prevValue` are one of:
+    * `null` — When absent.
+    * `any` — When present. If stringified, then it is parsed from string.
+    * `undefined` — When present and stringified and can't be parsed from string.
 
 ### Browser
 
