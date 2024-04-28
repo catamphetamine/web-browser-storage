@@ -113,8 +113,7 @@ Available `MemoryStorage` constructor options:
 `CachedStorage` could be used in cases when there're a lot of frequent writes to `localStorage`.
 
 ```js
-import { CachedStorage } from 'web-browser-storage/cache'
-import { LocalStorage } from 'web-browser-storage'
+import { LocalStorage, CachedStorage } from 'web-browser-storage'
 
 const localStorage = new LocalStorage()
 
