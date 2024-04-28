@@ -1,8 +1,15 @@
-type OnChangeListener = (key: string, value?: any, prevValue?: any) => void;
+import type { Timer } from 'web-browser-timer'
+import type { TabStatusWatcher } from 'web-browser-tab/status-watcher'
 
-export interface Storage {
-	get(key: string): any | undefined;
-	set(key: string, value?: any): void;
+type OnChangeListener = (parameters: {
+	key: string,
+	value?: any,
+	prevValue?: any
+}) => void;
+
+export class Storage<Value = any> {
+	get(key: string): Value | undefined;
+	set(key: string, value?: Value): void;
 	has(key: string): boolean;
 	delete(key: string): void;
 	getRecordSize(key: string): number;
@@ -10,27 +17,42 @@ export interface Storage {
 	onExternalChange(onChangeListener: OnChangeListener): () => void;
 }
 
-interface LocalStorage extends Storage {}
+export interface CachedStorageOptions<Value> {
+	storage: Storage;
+	tabStatusWatcher?: TabStatusWatcher;
+	timer?: Timer;
+	flushDelay: number;
+	log?: (...args: any[]) => void;
+	merge?: (newDataKey: string, existingDataKey: string, value: Value) => Value;
+	matchesPattern?: (key: string, pattern: string) => boolean;
+	cachedKeys?: string[];
+}
+
+export class CachedStorage<Value = any> extends Storage<Value> {
+  constructor(options?: CachedStorageOptions<Value>);
+	start(): void;
+	stop(): void;
+	flush(): void;
+	cacheKey(pattern: string): void;
+}
 
 interface LocalStorageOptions {
 	onFull?: ({ error: DOMException }) => void;
 	log?: (...args: any[]) => void;
 }
 
-export class LocalStorage {
+export class LocalStorage<Value> extends Storage<Value> {
   constructor(options?: LocalStorageOptions);
   static isAvailable(): boolean;
 }
-
-interface MemoryStorage extends Storage {}
 
 interface MemoryStorageOptions {
 	emulateSerialize?: boolean;
 }
 
-export class MemoryStorage {
+export class MemoryStorage<Value = any> extends Storage<Value> {
   constructor(options?: MemoryStorageOptions);
-  createSharedInstance(id: string): MemoryStorage;
-  getData(): object;
-  setData(data: object): void;
+  createSharedInstance(id: string): MemoryStorage<Value>;
+  getData(): Record<string, Value>;
+  setData(data: Record<string, Value>): void;
 }

@@ -138,6 +138,9 @@ localStorage.get('key') === null
 storage.stop()
 
 localStorage.get('key') === { a: 'b' }
+
+// One could also call `.flush()` manually, if required:
+// storage.flush()
 ```
 
 Available constructor parameters:
