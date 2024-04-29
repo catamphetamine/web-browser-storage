@@ -1,10 +1,10 @@
 import type { Timer } from 'web-browser-timer'
 import type { TabStatusWatcher } from 'web-browser-tab/status-watcher'
 
-type OnChangeListener = (parameters: {
+type OnChangeListener<Value> = (parameters: {
 	key: string,
-	value?: any,
-	prevValue?: any
+	value?: Value,
+	prevValue?: Value
 }) => void;
 
 export class Storage<Value = any> {
@@ -14,7 +14,7 @@ export class Storage<Value = any> {
 	delete(key: string): void;
 	getRecordSize(key: string): number;
 	keys(): string[];
-	onExternalChange(onChangeListener: OnChangeListener): () => void;
+	onExternalChange(onChangeListener: OnChangeListener<Value>): () => void;
 }
 
 export interface CachedStorageOptions<Value> {
